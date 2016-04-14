@@ -35,6 +35,8 @@ public class Main extends Application {
 
         vBox.getChildren().add(start);
 
+        primaryStage.setOnCloseRequest(event2 -> System.exit(0));
+
         portNum.setOnKeyPressed(event1 -> {
             switch (event1.getCode()){
                 case ENTER:
