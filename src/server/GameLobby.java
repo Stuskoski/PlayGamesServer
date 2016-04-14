@@ -67,6 +67,9 @@ public class GameLobby {
 
         stage.setTitle("Game Lobby");
 
+        stage.setX(Main.x);
+        stage.setY(Main.y);
+
         stage.show();
 
         startGame.setOnAction(event -> {
@@ -79,12 +82,14 @@ public class GameLobby {
                         int xORy = random.nextInt(2);
                         if (xORy == 1) {
                             ListOfSockets.writeToClient1("Tic Tac Toe - Player X");
+                            ListOfSockets.writeToClient1("Tic Tac Toe - Your turn");
                             ListOfSockets.writeToClient2("Tic Tac Toe - Player O");
-                            TicTacToeGameReference.ticTacToe = new TicTacToe("Client2", "Client1");
+                            TicTacToeGameReference.ticTacToe = new TicTacToe("Client2", "Client1"); //first client is O
                         } else {
                             ListOfSockets.writeToClient1("Tic Tac Toe - Player O");
                             ListOfSockets.writeToClient2("Tic Tac Toe - Player X");
-                            TicTacToeGameReference.ticTacToe = new TicTacToe("Client1", "Client2");
+                            ListOfSockets.writeToClient2("Tic Tac Toe - Your turn");
+                            TicTacToeGameReference.ticTacToe = new TicTacToe("Client1", "Client2"); // first client is O
                         }
                         TicTacToeGameReference.ticTacToe.startNewGame();
                         break;

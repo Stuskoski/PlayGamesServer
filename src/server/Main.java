@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-
+    public static double x, y;
     @Override
     public void start(Stage primaryStage) throws Exception{
 
@@ -48,6 +48,8 @@ public class Main extends Application {
         start.setOnAction(event -> {
             if(!portNum.getText().equals("") && portNum.getText() != null) {
                 if (Integer.parseInt(portNum.getText().replaceAll("[^0-9]","")) > 1025 && Integer.parseInt(portNum.getText().replaceAll("[^0-9]","")) < 65535) {
+                    x = primaryStage.getX();
+                    y = primaryStage.getY();
                     GameLobby.showLobby();
                     InitializeConnection init = new InitializeConnection(Integer.parseInt(portNum.getText().replaceAll("[^0-9]","")));
                     Thread thread = new Thread(init);

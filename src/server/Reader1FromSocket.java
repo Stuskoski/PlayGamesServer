@@ -23,7 +23,7 @@ public class Reader1FromSocket implements Runnable {
                 switch (GameLobby.game){
                     case "Tic Tac Toe": {
                         String[] nums = temp.split("\\s+");
-                        TicTacToeGameReference.ticTacToe.addToSpot(Integer.parseInt(nums[0]), Integer.parseInt(nums[1]), nums[2].charAt(0));
+                        TicTacToeGameReference.ticTacToe.addToSpot(Integer.parseInt(nums[0]), Integer.parseInt(nums[1]), nums[2].charAt(0)); // col row char
                         break;
                     }
                     case "Connect 4":{

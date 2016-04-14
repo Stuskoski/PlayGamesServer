@@ -42,12 +42,12 @@ public class TicTacToe {
 
     public void addToSpot(int row, int col, char xORo){
         if(!gameOver) {
-            moves++;
-            if (moves >= 10) {
-                ListOfSockets.writeToBothClients("Tic Tac Toe - Draw");
-            }
-
             if (checkSpot(row, col)) {
+
+                moves++;
+                if (moves >= 10) {
+                    ListOfSockets.writeToBothClients("Tic Tac Toe - Draw");
+                }
                 if (xORo == 'O') {
                     board[row][col] = xORo;
                     switch (playerO) {
@@ -91,6 +91,34 @@ public class TicTacToe {
                     ListOfSockets.writeToBothClients("Tic Tac Toe - Game Over");
                 }
             }
+
+
+            //Turn control
+            if(xORo == 'X'){
+                switch (playerX){
+                    case "Client1":{
+                        ListOfSockets.writeToClient1("Tic Tac Toe - Your turn");
+                        break;
+                    }
+                    case "Client2":{
+                        ListOfSockets.writeToClient2("Tic Tac Toe - Your turn");
+                        break;
+                    }
+                }
+            }
+            if(xORo == 'O'){
+                switch (playerO){
+                    case "Client1":{
+                        ListOfSockets.writeToClient1("Tic Tac Toe - Your turn");
+                        break;
+                    }
+                    case "Client2":{
+                        ListOfSockets.writeToClient2("Tic Tac Toe - Your turn");
+                        break;
+                    }
+                }
+            }
+
         }else {
             ListOfSockets.writeToBothClients("Tic Tac Toe - Game Over");
         }
@@ -104,11 +132,11 @@ public class TicTacToe {
         switch (xORo){
             case 'X': {
 
-                //Check for row wins
-                for(int rowI = 0; rowI<2; rowI++){
+                //Check for col wins
+                for(int colI = 0; colI <= 2; colI++){
                     int counter = 0;
-                    for(int colI = 0; colI < 2; colI++){
-                        if(board[rowI][colI] == 'X'){
+                    for(int rowI = 0; rowI <= 2; rowI++){
+                        if(board[colI][rowI] == 'X'){
                             counter++;
                         }
                         if(counter == 3)
@@ -116,10 +144,10 @@ public class TicTacToe {
                     }
                 }
 
-                //Check for col wins
-                for(int colI = 0; colI<2; colI++){
+                //Check for row wins
+                for(int rowI = 0; rowI<=2; rowI++){
                     int counter = 0;
-                    for(int rowI = 0; rowI < 2; rowI++){
+                    for(int colI = 0; colI <= 2; colI++){
                         if(board[colI][rowI] == 'X'){
                             counter++;
                         }
@@ -129,11 +157,11 @@ public class TicTacToe {
                 }
 
                 //Check for diag wins
-                if(board[2][0] == 'X' && board[1][1] == 'X' && board[0][2] == 'X')
+                if(board[2][0] == 'X' && board[1][1] == 'X' && board[0][2] == 'X') //col row
                     return true;
 
                 //Check for reverse diag wins
-                if(board[0][0] == 'X' && board[1][1] == 'X' && board[2][0] == 'X')
+                if(board[0][0] == 'X' && board[1][1] == 'X' && board[2][2] == 'X')
                     return true;
 
 
@@ -144,11 +172,11 @@ public class TicTacToe {
             }
             case 'O':{
 
-                //Check for row wins
-                for(int rowI = 0; rowI<2; rowI++){
+                //Check for col wins
+                for(int colI = 0; colI <= 2; colI++){
                     int counter = 0;
-                    for(int colI = 0; colI < 2; colI++){
-                        if(board[rowI][colI] == 'O'){
+                    for(int rowI = 0; rowI <= 2; rowI++){
+                        if(board[colI][rowI] == 'O'){
                             counter++;
                         }
                         if(counter == 3)
@@ -156,10 +184,10 @@ public class TicTacToe {
                     }
                 }
 
-                //Check for col wins
-                for(int colI = 0; colI<2; colI++){
+                //Check for row wins
+                for(int rowI = 0; rowI<=2; rowI++){
                     int counter = 0;
-                    for(int rowI = 0; rowI < 2; rowI++){
+                    for(int colI = 0; colI <= 2; colI++){
                         if(board[colI][rowI] == 'O'){
                             counter++;
                         }
@@ -173,7 +201,7 @@ public class TicTacToe {
                     return true;
 
                 //Check for reverse diag wins
-                if(board[0][0] == 'O' && board[1][1] == 'O' && board[2][0] == 'O')
+                if(board[0][0] == 'O' && board[1][1] == 'O' && board[2][2] == 'O')
                     return true;
 
                 break;
