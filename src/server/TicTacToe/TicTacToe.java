@@ -24,7 +24,6 @@ public class TicTacToe {
                 {'-', '-', '-'},
                 {'-', '-', '-'}
         };
-        System.out.println(board[0][0]);
     }
 
     /**
@@ -33,8 +32,8 @@ public class TicTacToe {
      * @return
      */
     public boolean checkSpot(int row, int col) {
-        System.out.println("Row : " + row);
-        System.out.println("Col : " + col);
+       // System.out.println("Row : " + row);
+       // System.out.println("Col : " + col);
         return board[row][col] != 'X' && board[row][col] != 'O';
 
 
@@ -43,11 +42,6 @@ public class TicTacToe {
     public void addToSpot(int row, int col, char xORo){
         if(!gameOver) {
             if (checkSpot(row, col)) {
-
-                moves++;
-                if (moves >= 10) {
-                    ListOfSockets.writeToBothClients("Tic Tac Toe - Draw");
-                }
                 if (xORo == 'O') {
                     board[row][col] = xORo;
                     switch (playerO) {
@@ -75,6 +69,7 @@ public class TicTacToe {
                         }
                     }
                 }
+                moves++;
             } else {
                 ListOfSockets.writeToBothClients("Tic Tac Toe - Invalid Spot");
             }
@@ -90,6 +85,9 @@ public class TicTacToe {
                     ListOfSockets.writeToBothClients("Tic Tac Toe - X Wins");
                     ListOfSockets.writeToBothClients("Tic Tac Toe - Game Over");
                 }
+            }
+            if(!checkForWin(row, col, xORo) && moves == 9){
+                ListOfSockets.writeToBothClients("Tic Tac Toe - Draw");
             }
 
 
@@ -125,13 +123,12 @@ public class TicTacToe {
     }
 
     private boolean checkForWin(int row, int col, char xORo) {
-        System.out.println(board[0][0] + "," + board[0][1] + "," + board[0][2]);
-        System.out.println(board[1][0] + "," + board[1][1] + "," + board[1][2]);
-        System.out.println(board[2][0] + "," + board[2][1] + "," + board[2][2]);
+       // System.out.println(board[0][0] + "," + board[0][1] + "," + board[0][2]);
+       // System.out.println(board[1][0] + "," + board[1][1] + "," + board[1][2]);
+       // System.out.println(board[2][0] + "," + board[2][1] + "," + board[2][2]);
 
         switch (xORo){
             case 'X': {
-
                 //Check for col wins
                 for(int colI = 0; colI <= 2; colI++){
                     int counter = 0;
