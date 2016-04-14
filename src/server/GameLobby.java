@@ -86,6 +86,7 @@ public class GameLobby {
                             ListOfSockets.writeToClient2("Tic Tac Toe - Player X");
                             TicTacToeGameReference.ticTacToe = new TicTacToe("Client1", "Client2");
                         }
+                        TicTacToeGameReference.ticTacToe.startNewGame();
                         break;
                     }
                     case "Connect 4": {
